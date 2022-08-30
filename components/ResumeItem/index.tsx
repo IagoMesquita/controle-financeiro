@@ -1,10 +1,17 @@
+import { IconType } from "react-icons";
 import * as C from "./styles";
 
-function ResumeItem() {
+type Props = {
+  title: string;
+  Icon: IconType;
+}
+
+function ResumeItem({ title, Icon }: Props) {
   return (
     <C.Container>
       <C.HeaderCard>
-        <C.HeaderTitle>Entrada</C.HeaderTitle>
+        <C.HeaderTitle>{title}</C.HeaderTitle>
+        <Icon/>
       </C.HeaderCard>
       <C.Total>R$ 100,00</C.Total>
     </C.Container>
