@@ -1,6 +1,5 @@
 import React from 'react'
 import Header from './Header';
-import Resume from './Resume';
 
 
 
@@ -12,7 +11,6 @@ function MainContainer({ children }: LayoutProps) {
   return (
     <>
       <Header/>
-      <Resume />
       <div>{children}</div>
     </>
   )
