@@ -1,7 +1,8 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import Resume from '../components/Resume'
+import type { NextPage } from "next";
+import Head from "next/head";
+// components
+import Form from "../components/Form";
+import Resume from "../components/Resume";
 
 const Home: NextPage = () => {
   return (
@@ -12,8 +13,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Resume />
+      <Form />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
