@@ -8,5 +8,4 @@ export const Container = styled.div`
   justify-content: space-around;
   gap: 20px;
   margin-top: -50px;
-  border: solid 1px white;
 `

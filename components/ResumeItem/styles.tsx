@@ -27,11 +27,12 @@ export const Container = styled.div`
 `
 
 export const HeaderCard = styled.div`
-  /* display: flex; */
-  /* justify-content: space-around; */
-  /* align-items: center; */
-  /* width: 100%; */
-  /* gap: 10px; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  margin: 20px auto;
 
   svg{
     width: 25px;
