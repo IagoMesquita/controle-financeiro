@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-type Props = { alignCenter?: boolean  }
+type Props = { alignCenter?: string }
 
 export const Tr = styled.tr``
 
