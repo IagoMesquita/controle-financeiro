@@ -8,12 +8,18 @@ import {
   FaDollarSign,
 } from "react-icons/fa";
 
-function Resume() {
+type BalanceProps = {
+  entries: number;
+  expenses: number;
+  balance: number;
+};
+
+function Resume({ entries, expenses, balance}: BalanceProps) {
   return (
     <C.Container>
-      <ResumeItem title="Entradas" Icon={FaRegArrowAltCircleUp}/>
-      <ResumeItem title="Saídas" Icon={FaRegArrowAltCircleDown}/>
-      <ResumeItem title="Total" Icon={FaDollarSign}/>
+      <ResumeItem title="Entradas" Icon={FaRegArrowAltCircleUp} value={entries}/>
+      <ResumeItem title="Saídas" Icon={FaRegArrowAltCircleDown} value={expenses}/>
+      <ResumeItem title="Total" Icon={FaDollarSign} value={balance}/>
     </C.Container>
   );
 }
