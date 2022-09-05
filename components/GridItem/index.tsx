@@ -5,30 +5,32 @@ import {
   FaRegArrowAltCircleDown,
   FaTrash,
 } from "react-icons/fa";
+
 import { ITransaction } from "../../interface/ITransaction";
+import formatCurrency from "../../utils/ formatCurrency";
 
 type Props = {
   item: ITransaction;
   onDelete: (id: string) => void;
 };
 
-function GetItem({item, onDelete}: Props) {
+function GetItem({ item, onDelete }: Props) {
   return (
     <C.Tr>
-        <C.Td >{item.desc}</C.Td>
-        <C.Td >{item.amount}</C.Td>
-        <C.Td alignCenter='true'>
-            {
-                item.isExpense ? (
-                    <FaRegArrowAltCircleDown color="red"/>
-                ): (
-                    <FaRegArrowAltCircleUp color="green"/>
-                )
-            }
-        </C.Td>
-        <C.Td alignCenter='true'>
-            <FaTrash onClick={ () => onDelete(item.id) }/>
-        </C.Td>
+      <C.Td>{item.desc}</C.Td>
+      <C.Td>
+        {formatCurrency(Number(item.amount))}
+      </C.Td>
+      <C.Td alignCenter="true">
+        {item.isExpense ? (
+          <FaRegArrowAltCircleDown color="red" />
+        ) : (
+          <FaRegArrowAltCircleUp color="green" />
+        )}
+      </C.Td>
+      <C.Td alignCenter="true">
+        <FaTrash onClick={() => onDelete(item.id)} />
+      </C.Td>
     </C.Tr>
   );
 }
