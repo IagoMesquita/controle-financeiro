@@ -9,7 +9,7 @@ import { ITransaction } from "../../interface/ITransaction";
 
 type Props = {
   item: ITransaction;
-  onDelete: (id: number) => void;
+  onDelete: (id: string) => void;
 };
 
 function GetItem({item, onDelete}: Props) {
