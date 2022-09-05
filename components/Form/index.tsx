@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { uuid } from "../../utils/uuid";
 import { ITransaction } from "../../interface/ITransaction";
 import Grid from "../Grid";
 import * as C from "./styles";
@@ -6,7 +7,7 @@ import * as C from "./styles";
 type Props = {
   handleAdd: (transaction: ITransaction) => void;
   transactions: ITransaction[];
-  setTransaction: () => void;
+  setTransaction: (transaction: ITransaction[]) => void;
 };
 
 function Form({ handleAdd, transactions, setTransaction }: Props) {
@@ -18,6 +19,7 @@ function Form({ handleAdd, transactions, setTransaction }: Props) {
     e.preventDefault();
 
     const data = {
+      id: uuid(),
       desc,
       amount,
       isExpense,
@@ -69,7 +71,7 @@ function Form({ handleAdd, transactions, setTransaction }: Props) {
         </C.RadioGroup>
         <C.Button>ADICIONAR</C.Button>
       </C.Form>
-      <Grid itens={transactions} setItens={transactions} />
+      <Grid itens={transactions} setItens={setTransaction} />
     </>
   );
 }
