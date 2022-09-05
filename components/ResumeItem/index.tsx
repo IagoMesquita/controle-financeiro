@@ -1,4 +1,5 @@
 import { IconType } from "react-icons";
+import formatCurrency from "../../utils/ formatCurrency";
 import * as C from "./styles";
 
 type Props = {
@@ -15,7 +16,7 @@ function ResumeItem({ title, Icon, value }: Props) {
         <C.HeaderTitle>{title}</C.HeaderTitle>
         <Icon/>
       </C.HeaderCard>
-      <C.Total>{ `R$ ${value}` }</C.Total>
+      <C.Total>{ formatCurrency(value) }</C.Total>
     </C.Container>
   );
 }
