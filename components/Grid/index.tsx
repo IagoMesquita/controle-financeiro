@@ -1,19 +1,19 @@
 import { isMapIterator } from "util/types";
+import { ITransaction } from "../../interface/ITransaction";
 import GetItem from "../GridItem";
-import { Container } from "../ResumeItem/styles";
 import * as C from "./styles";
 
 type Props = {
-  itens: string[];
-  setItens: () => void;
+  itens: ITransaction[];
+  setItens: (newArray: ITransaction[]) => void;
 };
 
 function Grid({itens, setItens}: Props) {
 
-  const onDelete = (id) => {
-    const newArray = intens.filter((intem) => intem.id !== id);
+  const onDelete = (id: string) => {
+    const newArray = itens.filter((intem) => intem.id !== id);
     setItens(newArray);
-    localStorage.setItem('transaction', JSON.stringify(newArray));
+    localStorage.setItem('transactions', JSON.stringify(newArray));
   }
 
   return (
