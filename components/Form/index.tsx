@@ -15,6 +15,9 @@ function Form({ handleAdd, transactions, setTransaction }: Props) {
   const [amount, setAmount] = useState("");
   const [isExpense, setExpense] = useState(false);
 
+  const [isDescriptionEmpty, setDescriptionValidation] = useState(false);
+  const [isAmountEmpty, setAmountValidation] = useState(false);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -26,7 +29,12 @@ function Form({ handleAdd, transactions, setTransaction }: Props) {
     };
 
     if(data.desc === "" || data.amount === "") {
+
+      data.desc === "" && setDescriptionValidation(true);
+      data.amount === "" && setAmountValidation(true);
+
       return;
+
     }
 
     handleAdd(data);
@@ -45,6 +53,7 @@ function Form({ handleAdd, transactions, setTransaction }: Props) {
             onChange={(e) => setDec(e.target.value)}
             value={desc}
           />
+          {isDescriptionEmpty && <span style={{color: "red", fontSize: 10}}>* Campo obrigatório!</span>}
         </C.InputContent>
         <C.InputContent>
           <C.Label>Valor</C.Label>
@@ -53,6 +62,7 @@ function Form({ handleAdd, transactions, setTransaction }: Props) {
             onChange={(e) => setAmount(e.target.value)}
             value={amount}
           />
+           {isAmountEmpty && <span style={{color: "red", fontSize: 10}}>* Campo obrigatório!</span>}
         </C.InputContent>
         <C.RadioGroup>
           <C.Input
