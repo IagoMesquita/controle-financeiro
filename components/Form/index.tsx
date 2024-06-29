@@ -25,6 +25,10 @@ function Form({ handleAdd, transactions, setTransaction }: Props) {
       isExpense,
     };
 
+    if(data.desc === "" || data.amount === "") {
+      return;
+    }
+
     handleAdd(data);
 
     setDec("");
