@@ -28,7 +28,11 @@ function Form({ handleAdd, transactions, setTransaction }: Props) {
       isExpense,
     };
 
-    if(data.desc === "" || data.amount === "") {
+    setDescriptionValidation(false);
+    setAmountValidation(false);
+
+
+    if (data.desc === "" || data.amount === "") {
 
       data.desc === "" && setDescriptionValidation(true);
       data.amount === "" && setAmountValidation(true);
@@ -53,16 +57,17 @@ function Form({ handleAdd, transactions, setTransaction }: Props) {
             onChange={(e) => setDec(e.target.value)}
             value={desc}
           />
-          {isDescriptionEmpty && <span style={{color: "red", fontSize: 10}}>* Campo obrigatório!</span>}
+          {isDescriptionEmpty && <span style={{ color: "red", fontSize: 10 }}>* Campo obrigatório!</span>}
         </C.InputContent>
         <C.InputContent>
           <C.Label>Valor</C.Label>
           <C.Input
             type="number"
+            min={0}
             onChange={(e) => setAmount(e.target.value)}
             value={amount}
           />
-           {isAmountEmpty && <span style={{color: "red", fontSize: 10}}>* Campo obrigatório!</span>}
+          {isAmountEmpty && <span style={{ color: "red", fontSize: 10 }}>* Campo obrigatório!</span>}
         </C.InputContent>
         <C.RadioGroup>
           <C.Input
