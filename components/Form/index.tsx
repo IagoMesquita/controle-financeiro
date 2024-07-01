@@ -64,6 +64,7 @@ function Form({ handleAdd, transactions, setTransaction }: Props) {
           <C.Input
             type="number"
             min={0}
+            step="0.01"
             onChange={(e) => setAmount(e.target.value)}
             value={amount}
           />
