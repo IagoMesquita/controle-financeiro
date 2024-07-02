@@ -89,7 +89,10 @@ function Form({ handleAdd, transactions, setTransaction }: Props) {
           />
           <C.Label htmlFor="rExpenses">Saída</C.Label>
         </C.RadioGroup>
-        <C.Button>ADICIONAR</C.Button>
+        <C.Button>
+        <C.Text>ADICIONAR</C.Text>
+        <C.Icon/>
+        </C.Button>
       </C.Form>
       <Grid itens={transactions} setItens={setTransaction} />
     </>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FaPlus } from "react-icons/fa";
 
 export const Form = styled.form`
   width: 98%;
@@ -10,16 +11,21 @@ export const Form = styled.form`
   padding: 15px 0px;
   display: flex;
   justify-content: space-around;
-  gap: 10px;
+
 
   @media (max-width: 750px) {
     display: grid;
+  }
+
+  @media (max-width: 778px) and (min-width: 757px) {
+    align-items: center;
+    justify-content: space-evenly;
   }
 `
 export const InputContent = styled.div`
   display: flex;
   flex-direction: column;
-` 
+`
 export const Label = styled.label`
   cursor: pointer;
   transition: .5s;
@@ -38,7 +44,7 @@ export const Input = styled.input`
   :hover {
     border:solid 1px teal;
   }
-` 
+`
 
 export const RadioGroup = styled.div`
   display: flex;
@@ -69,5 +75,31 @@ export const Button = styled.button`
   :hover {
     background: #009e9e;
     
+  }
+
+  @media (max-width: 778px) and (min-width: 757px) {
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+
+
+  }
+`
+
+export const Text = styled.span`
+    @media (max-width: 778px) and (min-width: 757px) {
+    display: none;
+  }
+`
+
+export const Icon = styled(FaPlus)`
+  display: none;
+
+  @media (max-width: 778px) and (min-width: 757px) {
+    display: block;
   }
 `
