@@ -8,4 +8,11 @@ export const Container = styled.div`
   justify-content: space-around;
   gap: 20px;
   margin-top: -50px;
+
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `

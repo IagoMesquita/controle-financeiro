@@ -9,21 +9,10 @@ export const Container = styled.div`
   width: 30%;
   padding: 5px 15px;
 
-  @media (max-widh: 750px) {
-    width: 20%;
-
-    p {
-      font-size: 12px;
-    }
-
-    span {
-      font-size: 20px;
-    }
-
-    svg {
-      display: none;
-    }
+  @media screen and (max-width: 767px) {
+    width: 80%;
   }
+
 `
 
 export const HeaderCard = styled.div`
@@ -46,4 +35,8 @@ export const HeaderTitle = styled.p`
 export const Total = styled.span`
   font-size: 30px;
   font-weight: bold;
+  @media (max-width: 768px) and (min-width: 1023px) {
+    font-size: 20px;
+  }
+
 `
