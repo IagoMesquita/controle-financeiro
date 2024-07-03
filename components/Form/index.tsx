@@ -22,7 +22,7 @@ function Form({ handleAdd, transactions, setTransaction }: Props) {
     e.preventDefault();
 
     const data = {
-      id: uuid(),
+      // id: uuid(),
       desc,
       amount,
       isExpense,
