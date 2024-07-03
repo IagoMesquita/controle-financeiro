@@ -17,7 +17,7 @@ const Home: NextPage = () => {
   }]);
 
   useEffect(() => {
-  
+
     let data;
     data = JSON.parse(localStorage.getItem('transactions')!) || [];
     setTransaction(data);
@@ -52,7 +52,21 @@ const Home: NextPage = () => {
 
   }, [transactions])
 
-  const handleAdd = (transaction: ITransaction) => {
+  const handleAdd = async (transaction: ITransaction) => {
+    const response = await fetch("http://localhost:8080/transactions", {
+      method: "POST",
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        "title": transaction.desc,
+        "amount": Number(transaction.amount),
+        "type": transaction.isExpense ? "EXPENSE" : "INCOME"
+      })
+    });
+
+    console.log(response);
+
     const newTransactions = [...transactions, transaction];
 
     setTransaction(newTransactions);
