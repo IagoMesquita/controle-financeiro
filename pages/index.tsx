@@ -8,27 +8,13 @@ import { ITransaction } from "../interface/ITransaction";
 
 
 
-const Home: NextPage = () => {
-  const [transactions, setTransaction] = useState<ITransaction[]>([{
-    id: '',
-    desc: '',
-    amount: '',
-    isExpense: false,
-  }]);
 
-  useEffect(() => {
 
-    let data;
-    data = JSON.parse(localStorage.getItem('transactions')!) || [];
-    setTransaction(data);
+const Home: NextPage<ITransaction> = ({dataDb}: any) => {
 
-  }, []);
 
-  // const data = typeof window !== 'undefined' && localStorage.getItem('transactions');
+  const [transactions, setTransaction] = useState<ITransaction[]>([...dataDb]);
 
-  // const [transactions, setTransaction] = useState <ITransaction[]> (
-  //   data ? JSON.parse(data) : []
-  // );
 
   const [entries, setEntries] = useState<number>(0);
   const [expenses, setExpenses] = useState<number>(0);
@@ -37,10 +23,10 @@ const Home: NextPage = () => {
 
   useEffect(() => {
 
-    const sumOfEntries = transactions.filter((el) => el.isExpense === false)
+    const sumOfEntries = transactions.filter((el) => el.type === "INCOME")
       .reduce((acc, el) => acc + Number(el.amount), 0)
 
-    const sumOfExpenses = transactions.filter((el) => el.isExpense)
+    const sumOfExpenses = transactions.filter((el) => el.type === "EXPENSE")
       .reduce((acc, el) => acc + Number(el.amount), 0)
 
     const total = sumOfEntries - sumOfExpenses;
@@ -52,22 +38,22 @@ const Home: NextPage = () => {
 
   }, [transactions])
 
-  const handleAdd = async (transaction: ITransaction) => {
+  const handleAdd = async (transaction: Omit<ITransaction, "id">) => {
     const response = await fetch("http://localhost:8080/transactions", {
       method: "POST",
       headers: {
         'content-type': 'application/json',
       },
       body: JSON.stringify({
-        "title": transaction.desc,
+        "title": transaction.title,
         "amount": Number(transaction.amount),
-        "type": transaction.isExpense ? "EXPENSE" : "INCOME"
+        "type": transaction.type ? "EXPENSE" : "INCOME"
       })
     });
 
-    console.log(response);
+    const newTransaction: ITransaction = await response.json();
 
-    const newTransactions = [...transactions, transaction];
+    const newTransactions = [...transactions, newTransaction];
 
     setTransaction(newTransactions);
 
@@ -92,8 +78,18 @@ const Home: NextPage = () => {
         transactions={transactions}
         setTransaction={setTransaction}
       />
+      
     </div>
   );
 };
+
+export async function getServerSideProps() {
+  const res = await fetch("http://localhost:8080/transactions");
+  const dataDb = await res.json();
+
+  return {
+    props: { dataDb },
+  };
+}
 
 export default Home;
