@@ -1,6 +1,6 @@
 export interface ITransaction {
   id: string;
-  desc: string;
-  amount: string;
-  isExpense: boolean;
+  title: string;
+  amount: string | number;
+  type: string;
 }

@@ -1,40 +1,42 @@
 import React, { useState } from "react";
-import { uuid } from "../../utils/uuid";
+// import { uuid } from "../../utils/uuid";
 import { ITransaction } from "../../interface/ITransaction";
 import Grid from "../Grid";
 import * as C from "./styles";
+import FormFilter from "../FormFilter";
+
+type addTransaction = Omit<ITransaction, 'id'>
 
 type Props = {
-  handleAdd: (transaction: ITransaction) => void;
+  handleAdd: (transaction: addTransaction) => void;
   transactions: ITransaction[];
   setTransaction: (transaction: ITransaction[]) => void;
 };
 
 function Form({ handleAdd, transactions, setTransaction }: Props) {
-  const [desc, setDec] = useState("");
+  const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
-  const [isExpense, setExpense] = useState(false);
+  const [type, setType] = useState("INCOME");
 
-  const [isDescriptionEmpty, setDescriptionValidation] = useState(false);
+  const [isTitleEmpty, setTitleValidation] = useState(false);
   const [isAmountEmpty, setAmountValidation] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const data = {
-      id: uuid(),
-      desc,
+      title,
       amount,
-      isExpense,
+      type,
     };
 
-    setDescriptionValidation(false);
+    setTitleValidation(false);
     setAmountValidation(false);
 
 
-    if (data.desc === "" || data.amount === "") {
+    if (data.title === "" || data.amount === "") {
 
-      data.desc === "" && setDescriptionValidation(true);
+      data.title === "" && setTitleValidation(true);
       data.amount === "" && setAmountValidation(true);
 
       return;
@@ -43,7 +45,7 @@ function Form({ handleAdd, transactions, setTransaction }: Props) {
 
     handleAdd(data);
 
-    setDec("");
+    setTitle("");
     setAmount("");
   };
 
@@ -51,13 +53,13 @@ function Form({ handleAdd, transactions, setTransaction }: Props) {
     <>
       <C.Form onSubmit={handleSubmit}>
         <C.InputContent>
-          <C.Label>Descrição</C.Label>
+          <C.Label>Titulo</C.Label>
           <C.Input
             type="text"
-            onChange={(e) => setDec(e.target.value)}
-            value={desc}
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
           />
-          {isDescriptionEmpty && <span style={{ color: "red", fontSize: 10 }}>* Campo obrigatório!</span>}
+          {isTitleEmpty && <span style={{ color: "red", fontSize: 10 }}>* Campo obrigatório!</span>}
         </C.InputContent>
         <C.InputContent>
           <C.Label>Valor</C.Label>
@@ -76,7 +78,7 @@ function Form({ handleAdd, transactions, setTransaction }: Props) {
             id="rIcome"
             defaultChecked
             name="group1"
-            onChange={() => setExpense(!isExpense)}
+            onChange={() => setType("INCOME")}
           />
           <C.Label htmlFor="rIcome">Entrada</C.Label>
         </C.RadioGroup>
@@ -85,7 +87,7 @@ function Form({ handleAdd, transactions, setTransaction }: Props) {
             type="radio"
             id="rExpenses"
             name="group1"
-            onChange={() => setExpense(!isExpense)}
+            onChange={() => setType("EXPENSE")}
           />
           <C.Label htmlFor="rExpenses">Saída</C.Label>
         </C.RadioGroup>
@@ -94,6 +96,7 @@ function Form({ handleAdd, transactions, setTransaction }: Props) {
         <C.Icon/>
         </C.Button>
       </C.Form>
+      <FormFilter/>
       <Grid itens={transactions} setItens={setTransaction} />
     </>
   );
