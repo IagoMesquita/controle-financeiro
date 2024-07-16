@@ -17,12 +17,12 @@ type Props = {
 function GetItem({ item, onDelete }: Props) {
   return (
     <C.Tr>
-      <C.Td>{item.desc}</C.Td>
+      <C.Td>{item.title}</C.Td>
       <C.Td>
         {formatCurrency(Number(item.amount))}
       </C.Td>
       <C.Td alignCenter="true">
-        {item.isExpense ? (
+        {item.type === "EXPENSE" ? (
           <FaRegArrowAltCircleDown color="red" />
         ) : (
           <FaRegArrowAltCircleUp color="green" />
