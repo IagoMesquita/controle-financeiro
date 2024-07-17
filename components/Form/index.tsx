@@ -96,7 +96,7 @@ function Form({ handleAdd, transactions, setTransaction }: Props) {
         <C.Icon/>
         </C.Button>
       </C.Form>
-      <FormFilter/>
+      <FormFilter filterItens={setTransaction}/>
       <Grid itens={transactions} setItens={setTransaction} />
     </>
   );
