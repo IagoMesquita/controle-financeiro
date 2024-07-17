@@ -19,10 +19,6 @@ function FormFilter({ filterItens }: Props) {
   const onSubmitFilter = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log("onSubmitFilter");
-
-    // if(selectType === "") return;
-
     try {
       const res = await fetch(`http://localhost:8080/transactions?type=${selectType}`);
 
@@ -31,8 +27,8 @@ function FormFilter({ filterItens }: Props) {
       }
 
       const transactionsDbFiltered = await res.json();
+      
       setError(false)
-      console.log("Fitrado", transactionsDbFiltered)
       filterItens(transactionsDbFiltered);
 
     } catch (error) {
@@ -62,36 +58,6 @@ function FormFilter({ filterItens }: Props) {
             <option value={new Date().getDay()}>Dia</option>
           </C.Select>
         </C.InputContent>
-        {/* <C.RadioGroup>
-          <C.Input
-            type="radio"
-            id="rYear"
-            defaultChecked
-            name="filtro"
-          
-          />
-          <C.Label htmlFor="rYear">Ano Vigente</C.Label>
-        </C.RadioGroup>
-        <C.RadioGroup>
-          <C.Input
-            type="radio"
-            id="rMonth"
-            name="filtro"
-   
-          />
-          <C.Label htmlFor="rMonth">Mes Vigente </C.Label>
-        </C.RadioGroup>
-        <C.RadioGroup>
-        <C.Input
-            type="radio"
-            id="rDay"
-            defaultChecked
-            name="filtro"
-          
-          />
-          <C.Label htmlFor="rDay">Dia</C.Label>
-        </C.RadioGroup> */}
-
         <C.Button>
           <C.Text>Filtrar</C.Text>
           <C.Icon />
